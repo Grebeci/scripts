@@ -3,6 +3,8 @@ set -eu
 set -o pipefail
 
 MySQL_REPO="https://dev.mysql.com/get/mysql80-community-release-el7-1.noarch.rpm"
+[[ $(rpm -qa | grep libaio | wc -l) -ne 0 ]] || (echo "缺少libaio依赖" && exit 1)
+[[ $(rpm -qa | grep net-tools | wc -l) -ne 0 ]] || (echo "缺少 net-tools依赖" && exit 1)
 
 function init() {
 # stop mysql
